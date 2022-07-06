@@ -1,0 +1,9 @@
+RpcUrl: "https://bsc.getblock.io/testnet/?api_key=xxxxxx"
+Mnemonic: 
+USDT: "0x7ef95a0fee0dd31b22626fa2e10ee6a223f8a684"
+BUSD: "0x7ef95a0fee0dd31b22626fa2e10ee6a223f8a684"
+BUSDTreasury: "0xFEDc49eEF7bb3F743E694A7ac10B9693EeA8c08d"
+TreasuryOwnerPath: "m/44'/60'/0'/0/0"
+Dispatcher: "0xdB482C6f913599f803c106163Ca7ac21577e400A"
+DispatcherOwnerPath: "m/44'/60'/0'/0/0"
+WithdrawalAccount: "0x7ef95a0fee0dd31b22626fa2e10ee6a223f8a684"

@@ -1,0 +1,10 @@
+appDebug: true  
+Logs:
+  GinLogName: "/storage/logs/gin.log"                 
+  GoSkeletonLogName: "/storage/logs/goskeleton.log"   
+  TextFormat: "json"                                
+  TimePrecision: "millisecond"                        
+  MaxSize: 10                                       
+  MaxBackups: 7                                        
+  MaxAge: 15                                          
+  Compress: false                                      
