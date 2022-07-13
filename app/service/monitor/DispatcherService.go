@@ -1,92 +1,98 @@
 package monitor
 
 import (
+	"crypto/ecdsa"
 	"goskeleton/abi/defi/dispatcher"
 	"goskeleton/abi/defi/erc20"
 	"goskeleton/app/global/variable"
 	"goskeleton/app/utils/blockchain"
-	"goskeleton/hdwallet"
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/accounts"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/crypto"
 	"go.uber.org/zap"
 )
 
 type DispatcherService struct {
-	owner             accounts.Account
-	instance          *dispatcher.Dispatcher
-	dispatcherAddress common.Address
+	//owner             accounts.Account
+	instance                   *dispatcher.Dispatcher
+	dispatcherAddress          common.Address
+	treasuryAddress            common.Address
+	privateKey                 *ecdsa.PrivateKey
+	owner                      common.Address
+	chainBridgeId              *big.Int
+	withdrawalTokenAddress     common.Address
+	withdrawalAccountAddress   common.Address
+	withdrawalAccountThreshold *big.Int
+	withdrawalTokenErc20       *erc20.Erc20
 }
 
 func CreateDispatcherService() *DispatcherService {
-	dispatcherAddress := common.HexToAddress(variable.ConfigDefiYml.GetString("Dispatcher"))
+	dispatcherAddress := common.HexToAddress(variable.ConfigDefiYml.GetString("DispatcherAddress"))
 	instance, err := dispatcher.NewDispatcher(dispatcherAddress, blockchain.Client)
 	if err != nil {
 		panic(err)
 	}
-	path := hdwallet.MustParseDerivationPath(variable.ConfigDefiYml.GetString("DispatcherOwnerPath"))
-	owner, err := blockchain.Wallet.Derive(path, false)
-	variable.ZapLog.Info("owner = ", zap.String("owner", owner.Address.Hex()))
+	privateKey, err := crypto.HexToECDSA(variable.ConfigDefiYml.GetString("PrivateKey"))
+	owner := blockchain.PrivateKeyToAddress(privateKey)
+	variable.ZapLog.Info("owner = ", zap.String("owner", owner.Hex()))
 	if err != nil {
 		panic(err)
 	}
-	return &DispatcherService{owner, instance, dispatcherAddress}
+	treasuryAddress := common.HexToAddress(variable.ConfigDefiYml.GetString("TreasuryAddress"))
+	chainBridgeId := big.NewInt(variable.ConfigDefiYml.GetInt64("ChainBridgeId"))
+	var withdrawalAccountThreshold = big.NewInt(variable.ConfigDefiYml.GetInt64("WithdrawalAccountThreshold"))
+	withdrawalAccountThreshold = blockchain.ToWei(withdrawalAccountThreshold, 18)
+	withdrawalTokenAddress := common.HexToAddress(variable.ConfigDefiYml.GetString("WithdrawalTokenAddress"))
+	withdrawalTokenErc20, err := erc20.NewErc20(withdrawalTokenAddress, blockchain.Client)
+	if err != nil {
+		panic(err)
+	}
+	withdrawalAccountAddress := common.HexToAddress(variable.ConfigDefiYml.GetString("WithdrawalAccountAddress"))
+	return &DispatcherService{
+		instance, dispatcherAddress, treasuryAddress, privateKey, owner,
+		chainBridgeId,
+		withdrawalTokenAddress,
+		withdrawalAccountAddress,
+		withdrawalAccountThreshold,
+		withdrawalTokenErc20,
+	}
 }
 
-func (service *DispatcherService) Dispatch() (tx *types.Transaction, _err error) {
-	gas, err := blockchain.BuildEstimateGas(service.owner, dispatcher.DispatcherABI, &service.dispatcherAddress, "dispatch")
+func (service *DispatcherService) TreasuryWithdrawAndDispatch() (tx *types.Transaction, _err error) {
+	gas, err := blockchain.BuildEstimateGas(service.owner, dispatcher.DispatcherABI, &service.dispatcherAddress,
+		"treasuryWithdrawAndDispatch", service.treasuryAddress)
 	if err != nil {
 		variable.ZapLog.Error("error = ", zap.Error(err))
 		_err = err
 		return
 	}
 	variable.ZapLog.Info("gas = ", zap.Uint64("gas", gas))
-	auth, _ := blockchain.BuildTransactor(service.owner)
+	auth, _ := blockchain.BuildTransactor(service.privateKey)
 	auth.GasLimit = uint64(gas + 120000) // in units
-	return service.instance.Dispatch(auth)
+	return service.instance.TreasuryWithdrawAndDispatch(auth, service.treasuryAddress)
 }
 
-func (service *DispatcherService) Execute(pid *big.Int) (tx *types.Transaction, _err error) {
-	gas, err := blockchain.BuildEstimateGas(service.owner, dispatcher.DispatcherABI, &service.dispatcherAddress, "execute", pid)
+func (service *DispatcherService) ChainBridgeToWithdrawalAccount() (tx *types.Transaction, _err error) {
+	gas, err := blockchain.BuildEstimateGas(service.owner, dispatcher.DispatcherABI, &service.dispatcherAddress,
+		"chainBridgeToWithdrawalAccount", service.chainBridgeId, service.withdrawalTokenAddress, service.withdrawalAccountAddress)
 	if err != nil {
 		variable.ZapLog.Error("error = ", zap.Error(err))
 		_err = err
 		return
 	}
 	variable.ZapLog.Info("gas = ", zap.Uint64("gas", gas))
-	auth, _ := blockchain.BuildTransactor(service.owner)
+	auth, _ := blockchain.BuildTransactor(service.privateKey)
 	auth.GasLimit = uint64(gas + 120000) // in units
-	return service.instance.Execute(auth, pid)
+	return service.instance.ChainBridgeToWithdrawalAccount(auth, service.chainBridgeId, service.withdrawalTokenAddress, service.withdrawalAccountAddress)
 }
 
-func (service *DispatcherService) Strategys(pid *big.Int) (struct {
-	Strategy common.Address
-	Point    *big.Int
-}, error) {
-	return service.instance.Strategys(nil, pid)
-}
-
-func (service *DispatcherService) CanExecute(pid *big.Int) bool {
-	token0, _ := service.instance.Token0(nil)
-	token1, _ := service.instance.Token1(nil)
-	tokenInstance0, _ := erc20.NewErc20(token0, blockchain.Client)
-	tokenInstance1, _ := erc20.NewErc20(token1, blockchain.Client)
-
-	balance0, _ := tokenInstance0.BalanceOf(nil, service.dispatcherAddress)
-	balance1, _ := tokenInstance1.BalanceOf(nil, service.dispatcherAddress)
-	if (balance0 == nil || balance0.Uint64() == 0) && (balance1 == nil || balance1.Uint64() == 0) {
+func (service *DispatcherService) CanChainBridgeToWithdrawalAccount() bool {
+	if balanceOf, err := service.withdrawalTokenErc20.BalanceOf(nil, service.withdrawalAccountAddress); err != nil {
 		return false
+	} else if balanceOf.Cmp(service.withdrawalAccountThreshold) < 0 {
+		return true
 	}
-	strategy, _ := service.instance.Strategys(nil, pid)
-	allowance0, _ := tokenInstance0.Allowance(nil, service.dispatcherAddress, strategy.Strategy)
-	allowance1, _ := tokenInstance1.Allowance(nil, service.dispatcherAddress, strategy.Strategy)
-	if (allowance0 == nil || allowance0.Uint64() == 0) && (allowance1 == nil || allowance1.Uint64() == 0) {
-		return false
-	}
-	if strategy.Point.Uint64() == 0 {
-		return false
-	}
-	return true
+	return false
 }

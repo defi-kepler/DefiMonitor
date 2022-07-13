@@ -2,16 +2,13 @@ package blockchain
 
 import (
 	"context"
+	"crypto/ecdsa"
 	"fmt"
-	"goskeleton/abi/defi/erc20"
 	"goskeleton/app/global/variable"
-	"goskeleton/hdwallet"
-	"log"
 	"math/big"
 	"strings"
 
 	"github.com/ethereum/go-ethereum"
-	"github.com/ethereum/go-ethereum/accounts"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
@@ -24,7 +21,6 @@ import (
 
 var (
 	Client *ethclient.Client
-	Wallet *hdwallet.Wallet
 )
 
 func init() {
@@ -34,59 +30,7 @@ func init() {
 	if err != nil {
 		variable.ZapLog.Error("RPC 链接异常")
 	}
-	mnemonic := variable.ConfigDefiYml.GetString("Mnemonic")
-	Wallet, err = hdwallet.NewFromMnemonic(mnemonic)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
 
-func ERC20Transfer(tokenAdd string, pathStr string, toAddr string, amount *big.Int) (tx *types.Transaction, err error) {
-	tokenAddress := common.HexToAddress(tokenAdd)
-	instance, _ := erc20.NewErc20(tokenAddress, Client)
-	toAddress := common.HexToAddress(toAddr)
-	path := hdwallet.MustParseDerivationPath(pathStr)
-	account, err := Wallet.Derive(path, false)
-	if err != nil {
-		variable.ZapLog.Sugar().Error(err)
-	}
-	nonce, err := Client.PendingNonceAt(context.Background(), account.Address)
-	if err != nil {
-		variable.ZapLog.Sugar().Error(err)
-	}
-	gasPrice, err := Client.SuggestGasPrice(context.Background())
-	if err != nil {
-		variable.ZapLog.Sugar().Error(err)
-	}
-	privateKey, err := Wallet.PrivateKey(account)
-	if err != nil {
-		variable.ZapLog.Sugar().Error(err)
-	}
-	chainID, _ := Client.ChainID(context.Background())
-	auth, _ := bind.NewKeyedTransactorWithChainID(privateKey, chainID)
-	auth.Nonce = big.NewInt(int64(nonce))
-	auth.Value = big.NewInt(0)     // in wei
-	auth.GasLimit = uint64(300000) // in units
-	auth.GasPrice = gasPrice
-	tx, err = instance.Transfer(auth, toAddress, amount)
-	if err != nil {
-		variable.ZapLog.Sugar().Error(err)
-	}
-	variable.ZapLog.Sugar().Info(tx.Hash())
-	return
-}
-
-func ERC20TransferBySymbol(symbol string, pathStr string, toAddr string, amount *big.Int) (tx *types.Transaction, err error) {
-	if strings.ToUpper(symbol) == "BUSD" {
-		busd := variable.ConfigDefiYml.GetString("BUSD")
-		tx, err = ERC20Transfer(busd, pathStr, toAddr, amount)
-	} else if strings.ToLower(symbol) == "usdt" {
-		USDT := variable.ConfigDefiYml.GetString("USDT")
-		tx, err = ERC20Transfer(USDT, pathStr, toAddr, amount)
-	} else {
-		panic("symbol error")
-	}
-	return
 }
 
 func GetSigner(signature []byte, data []byte) string {
@@ -126,7 +70,7 @@ func ToWei(iamount interface{}, decimals int) *big.Int {
 	return wei
 }
 
-func BuildEstimateGas(owner accounts.Account, abiStr string, contractAddress *common.Address, method string, args ...interface{}) (uint64, error) {
+func BuildEstimateGas(from common.Address, abiStr string, contractAddress *common.Address, method string, args ...interface{}) (uint64, error) {
 	abi, _ := abi.JSON(strings.NewReader(abiStr))
 	var data []byte
 	if len(args) > 0 {
@@ -135,7 +79,7 @@ func BuildEstimateGas(owner accounts.Account, abiStr string, contractAddress *co
 		data, _ = abi.Pack(method)
 	}
 	ethRPCParams := ethereum.CallMsg{
-		From:  owner.Address,
+		From:  from,
 		To:    contractAddress,
 		Value: big.NewInt(0),
 		Data:  data,
@@ -143,18 +87,18 @@ func BuildEstimateGas(owner accounts.Account, abiStr string, contractAddress *co
 	return Client.EstimateGas(context.Background(), ethRPCParams)
 }
 
-func BuildTransactor(owner accounts.Account) (opts *bind.TransactOpts, _err error) {
-	nonce, err := Client.PendingNonceAt(context.Background(), owner.Address)
+func PrivateKeyToAddress(privateKey *ecdsa.PrivateKey) common.Address {
+	return crypto.PubkeyToAddress(privateKey.PublicKey)
+}
+
+func BuildTransactor(privateKey *ecdsa.PrivateKey) (opts *bind.TransactOpts, _err error) {
+
+	nonce, err := Client.PendingNonceAt(context.Background(), PrivateKeyToAddress(privateKey))
 	if err != nil {
 		_err = err
 		return
 	}
 	gasPrice, err := Client.SuggestGasPrice(context.Background())
-	if err != nil {
-		_err = err
-		return
-	}
-	privateKey, err := Wallet.PrivateKey(owner)
 	if err != nil {
 		_err = err
 		return

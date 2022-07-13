@@ -30,7 +30,7 @@ var (
 
 // DispatcherMetaData contains all meta data concerning the Dispatcher contract.
 var DispatcherMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_token0\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_token1\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"strategy\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"token0Amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"token1Amount\",\"type\":\"uint256\"}],\"name\":\"Dispatch\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"strategy\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"point\",\"type\":\"uint256\"}],\"name\":\"addStrategys\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"stoken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"approveERC20\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"dispatch\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"i\",\"type\":\"uint256\"}],\"name\":\"execute\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"strategys\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"strategy\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"point\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"stoken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"}],\"name\":\"sweep\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"token0\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"token1\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"tokenPoint\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"point\",\"type\":\"uint256\"}],\"name\":\"updateStrategys\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+	ABI: "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_token0\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_token1\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"strategy\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"token0Amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"token1Amount\",\"type\":\"uint256\"}],\"name\":\"Dispatch\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint8\",\"name\":\"receiverType\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"point0\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"point1\",\"type\":\"uint256\"}],\"name\":\"addReceiver\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"withdrawalAccount\",\"type\":\"address\"}],\"name\":\"chainBridgeToWithdrawalAccount\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"dispatch\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"maximumToWithdrawalAccount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"percentageToWithdrawalAccount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"}],\"name\":\"receiverHarvest\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"}],\"name\":\"receiverTotalAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"leaveAmount\",\"type\":\"uint256\"}],\"name\":\"receiverWithdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"receivers\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"point0\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"point1\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"receiverType\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_maximumToWithdrawalAccount\",\"type\":\"uint256\"}],\"name\":\"setMaximumToWithdrawalAccount\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"allow\",\"type\":\"bool\"}],\"name\":\"setOperator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_percentageToWithdrawalAccount\",\"type\":\"uint256\"}],\"name\":\"setPercentageToWithdrawalAccount\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"}],\"name\":\"setPuppetDispatcher\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"allow\",\"type\":\"bool\"}],\"name\":\"setPuppetOperator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"stoken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"}],\"name\":\"sweep\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"token0\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"token1\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"tokenPoint0\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"tokenPoint1\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"}],\"name\":\"treasuryWithdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"}],\"name\":\"treasuryWithdrawAndDispatch\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"point0\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"point1\",\"type\":\"uint256\"}],\"name\":\"updateReceiver\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
 }
 
 // DispatcherABI is the input ABI used to generate the binding from.
@@ -179,6 +179,37 @@ func (_Dispatcher *DispatcherTransactorRaw) Transact(opts *bind.TransactOpts, me
 	return _Dispatcher.Contract.contract.Transact(opts, method, params...)
 }
 
+// MaximumToWithdrawalAccount is a free data retrieval call binding the contract method 0x76439491.
+//
+// Solidity: function maximumToWithdrawalAccount() view returns(uint256)
+func (_Dispatcher *DispatcherCaller) MaximumToWithdrawalAccount(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _Dispatcher.contract.Call(opts, &out, "maximumToWithdrawalAccount")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// MaximumToWithdrawalAccount is a free data retrieval call binding the contract method 0x76439491.
+//
+// Solidity: function maximumToWithdrawalAccount() view returns(uint256)
+func (_Dispatcher *DispatcherSession) MaximumToWithdrawalAccount() (*big.Int, error) {
+	return _Dispatcher.Contract.MaximumToWithdrawalAccount(&_Dispatcher.CallOpts)
+}
+
+// MaximumToWithdrawalAccount is a free data retrieval call binding the contract method 0x76439491.
+//
+// Solidity: function maximumToWithdrawalAccount() view returns(uint256)
+func (_Dispatcher *DispatcherCallerSession) MaximumToWithdrawalAccount() (*big.Int, error) {
+	return _Dispatcher.Contract.MaximumToWithdrawalAccount(&_Dispatcher.CallOpts)
+}
+
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
 //
 // Solidity: function owner() view returns(address)
@@ -210,49 +241,121 @@ func (_Dispatcher *DispatcherCallerSession) Owner() (common.Address, error) {
 	return _Dispatcher.Contract.Owner(&_Dispatcher.CallOpts)
 }
 
-// Strategys is a free data retrieval call binding the contract method 0xc56c49e6.
+// PercentageToWithdrawalAccount is a free data retrieval call binding the contract method 0xd12256eb.
 //
-// Solidity: function strategys(uint256 ) view returns(address strategy, uint256 point)
-func (_Dispatcher *DispatcherCaller) Strategys(opts *bind.CallOpts, arg0 *big.Int) (struct {
-	Strategy common.Address
-	Point    *big.Int
+// Solidity: function percentageToWithdrawalAccount() view returns(uint256)
+func (_Dispatcher *DispatcherCaller) PercentageToWithdrawalAccount(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _Dispatcher.contract.Call(opts, &out, "percentageToWithdrawalAccount")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// PercentageToWithdrawalAccount is a free data retrieval call binding the contract method 0xd12256eb.
+//
+// Solidity: function percentageToWithdrawalAccount() view returns(uint256)
+func (_Dispatcher *DispatcherSession) PercentageToWithdrawalAccount() (*big.Int, error) {
+	return _Dispatcher.Contract.PercentageToWithdrawalAccount(&_Dispatcher.CallOpts)
+}
+
+// PercentageToWithdrawalAccount is a free data retrieval call binding the contract method 0xd12256eb.
+//
+// Solidity: function percentageToWithdrawalAccount() view returns(uint256)
+func (_Dispatcher *DispatcherCallerSession) PercentageToWithdrawalAccount() (*big.Int, error) {
+	return _Dispatcher.Contract.PercentageToWithdrawalAccount(&_Dispatcher.CallOpts)
+}
+
+// ReceiverTotalAmount is a free data retrieval call binding the contract method 0xee00f7af.
+//
+// Solidity: function receiverTotalAmount(uint256 pid) view returns(uint256)
+func (_Dispatcher *DispatcherCaller) ReceiverTotalAmount(opts *bind.CallOpts, pid *big.Int) (*big.Int, error) {
+	var out []interface{}
+	err := _Dispatcher.contract.Call(opts, &out, "receiverTotalAmount", pid)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// ReceiverTotalAmount is a free data retrieval call binding the contract method 0xee00f7af.
+//
+// Solidity: function receiverTotalAmount(uint256 pid) view returns(uint256)
+func (_Dispatcher *DispatcherSession) ReceiverTotalAmount(pid *big.Int) (*big.Int, error) {
+	return _Dispatcher.Contract.ReceiverTotalAmount(&_Dispatcher.CallOpts, pid)
+}
+
+// ReceiverTotalAmount is a free data retrieval call binding the contract method 0xee00f7af.
+//
+// Solidity: function receiverTotalAmount(uint256 pid) view returns(uint256)
+func (_Dispatcher *DispatcherCallerSession) ReceiverTotalAmount(pid *big.Int) (*big.Int, error) {
+	return _Dispatcher.Contract.ReceiverTotalAmount(&_Dispatcher.CallOpts, pid)
+}
+
+// Receivers is a free data retrieval call binding the contract method 0xbfd772fc.
+//
+// Solidity: function receivers(uint256 ) view returns(address to, uint256 point0, uint256 point1, uint8 receiverType)
+func (_Dispatcher *DispatcherCaller) Receivers(opts *bind.CallOpts, arg0 *big.Int) (struct {
+	To           common.Address
+	Point0       *big.Int
+	Point1       *big.Int
+	ReceiverType uint8
 }, error) {
 	var out []interface{}
-	err := _Dispatcher.contract.Call(opts, &out, "strategys", arg0)
+	err := _Dispatcher.contract.Call(opts, &out, "receivers", arg0)
 
 	outstruct := new(struct {
-		Strategy common.Address
-		Point    *big.Int
+		To           common.Address
+		Point0       *big.Int
+		Point1       *big.Int
+		ReceiverType uint8
 	})
 	if err != nil {
 		return *outstruct, err
 	}
 
-	outstruct.Strategy = *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
-	outstruct.Point = *abi.ConvertType(out[1], new(*big.Int)).(**big.Int)
+	outstruct.To = *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+	outstruct.Point0 = *abi.ConvertType(out[1], new(*big.Int)).(**big.Int)
+	outstruct.Point1 = *abi.ConvertType(out[2], new(*big.Int)).(**big.Int)
+	outstruct.ReceiverType = *abi.ConvertType(out[3], new(uint8)).(*uint8)
 
 	return *outstruct, err
 
 }
 
-// Strategys is a free data retrieval call binding the contract method 0xc56c49e6.
+// Receivers is a free data retrieval call binding the contract method 0xbfd772fc.
 //
-// Solidity: function strategys(uint256 ) view returns(address strategy, uint256 point)
-func (_Dispatcher *DispatcherSession) Strategys(arg0 *big.Int) (struct {
-	Strategy common.Address
-	Point    *big.Int
+// Solidity: function receivers(uint256 ) view returns(address to, uint256 point0, uint256 point1, uint8 receiverType)
+func (_Dispatcher *DispatcherSession) Receivers(arg0 *big.Int) (struct {
+	To           common.Address
+	Point0       *big.Int
+	Point1       *big.Int
+	ReceiverType uint8
 }, error) {
-	return _Dispatcher.Contract.Strategys(&_Dispatcher.CallOpts, arg0)
+	return _Dispatcher.Contract.Receivers(&_Dispatcher.CallOpts, arg0)
 }
 
-// Strategys is a free data retrieval call binding the contract method 0xc56c49e6.
+// Receivers is a free data retrieval call binding the contract method 0xbfd772fc.
 //
-// Solidity: function strategys(uint256 ) view returns(address strategy, uint256 point)
-func (_Dispatcher *DispatcherCallerSession) Strategys(arg0 *big.Int) (struct {
-	Strategy common.Address
-	Point    *big.Int
+// Solidity: function receivers(uint256 ) view returns(address to, uint256 point0, uint256 point1, uint8 receiverType)
+func (_Dispatcher *DispatcherCallerSession) Receivers(arg0 *big.Int) (struct {
+	To           common.Address
+	Point0       *big.Int
+	Point1       *big.Int
+	ReceiverType uint8
 }, error) {
-	return _Dispatcher.Contract.Strategys(&_Dispatcher.CallOpts, arg0)
+	return _Dispatcher.Contract.Receivers(&_Dispatcher.CallOpts, arg0)
 }
 
 // Token0 is a free data retrieval call binding the contract method 0x0dfe1681.
@@ -317,12 +420,12 @@ func (_Dispatcher *DispatcherCallerSession) Token1() (common.Address, error) {
 	return _Dispatcher.Contract.Token1(&_Dispatcher.CallOpts)
 }
 
-// TokenPoint is a free data retrieval call binding the contract method 0xc5e0a2ae.
+// TokenPoint0 is a free data retrieval call binding the contract method 0x1436af55.
 //
-// Solidity: function tokenPoint() view returns(uint256)
-func (_Dispatcher *DispatcherCaller) TokenPoint(opts *bind.CallOpts) (*big.Int, error) {
+// Solidity: function tokenPoint0() view returns(uint256)
+func (_Dispatcher *DispatcherCaller) TokenPoint0(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _Dispatcher.contract.Call(opts, &out, "tokenPoint")
+	err := _Dispatcher.contract.Call(opts, &out, "tokenPoint0")
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -334,60 +437,91 @@ func (_Dispatcher *DispatcherCaller) TokenPoint(opts *bind.CallOpts) (*big.Int, 
 
 }
 
-// TokenPoint is a free data retrieval call binding the contract method 0xc5e0a2ae.
+// TokenPoint0 is a free data retrieval call binding the contract method 0x1436af55.
 //
-// Solidity: function tokenPoint() view returns(uint256)
-func (_Dispatcher *DispatcherSession) TokenPoint() (*big.Int, error) {
-	return _Dispatcher.Contract.TokenPoint(&_Dispatcher.CallOpts)
+// Solidity: function tokenPoint0() view returns(uint256)
+func (_Dispatcher *DispatcherSession) TokenPoint0() (*big.Int, error) {
+	return _Dispatcher.Contract.TokenPoint0(&_Dispatcher.CallOpts)
 }
 
-// TokenPoint is a free data retrieval call binding the contract method 0xc5e0a2ae.
+// TokenPoint0 is a free data retrieval call binding the contract method 0x1436af55.
 //
-// Solidity: function tokenPoint() view returns(uint256)
-func (_Dispatcher *DispatcherCallerSession) TokenPoint() (*big.Int, error) {
-	return _Dispatcher.Contract.TokenPoint(&_Dispatcher.CallOpts)
+// Solidity: function tokenPoint0() view returns(uint256)
+func (_Dispatcher *DispatcherCallerSession) TokenPoint0() (*big.Int, error) {
+	return _Dispatcher.Contract.TokenPoint0(&_Dispatcher.CallOpts)
 }
 
-// AddStrategys is a paid mutator transaction binding the contract method 0xf0616db8.
+// TokenPoint1 is a free data retrieval call binding the contract method 0xf56f2607.
 //
-// Solidity: function addStrategys(address strategy, uint256 point) returns()
-func (_Dispatcher *DispatcherTransactor) AddStrategys(opts *bind.TransactOpts, strategy common.Address, point *big.Int) (*types.Transaction, error) {
-	return _Dispatcher.contract.Transact(opts, "addStrategys", strategy, point)
+// Solidity: function tokenPoint1() view returns(uint256)
+func (_Dispatcher *DispatcherCaller) TokenPoint1(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _Dispatcher.contract.Call(opts, &out, "tokenPoint1")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
 }
 
-// AddStrategys is a paid mutator transaction binding the contract method 0xf0616db8.
+// TokenPoint1 is a free data retrieval call binding the contract method 0xf56f2607.
 //
-// Solidity: function addStrategys(address strategy, uint256 point) returns()
-func (_Dispatcher *DispatcherSession) AddStrategys(strategy common.Address, point *big.Int) (*types.Transaction, error) {
-	return _Dispatcher.Contract.AddStrategys(&_Dispatcher.TransactOpts, strategy, point)
+// Solidity: function tokenPoint1() view returns(uint256)
+func (_Dispatcher *DispatcherSession) TokenPoint1() (*big.Int, error) {
+	return _Dispatcher.Contract.TokenPoint1(&_Dispatcher.CallOpts)
 }
 
-// AddStrategys is a paid mutator transaction binding the contract method 0xf0616db8.
+// TokenPoint1 is a free data retrieval call binding the contract method 0xf56f2607.
 //
-// Solidity: function addStrategys(address strategy, uint256 point) returns()
-func (_Dispatcher *DispatcherTransactorSession) AddStrategys(strategy common.Address, point *big.Int) (*types.Transaction, error) {
-	return _Dispatcher.Contract.AddStrategys(&_Dispatcher.TransactOpts, strategy, point)
+// Solidity: function tokenPoint1() view returns(uint256)
+func (_Dispatcher *DispatcherCallerSession) TokenPoint1() (*big.Int, error) {
+	return _Dispatcher.Contract.TokenPoint1(&_Dispatcher.CallOpts)
 }
 
-// ApproveERC20 is a paid mutator transaction binding the contract method 0xa8e5e4aa.
+// AddReceiver is a paid mutator transaction binding the contract method 0xc9fa81cb.
 //
-// Solidity: function approveERC20(address stoken, address spender, uint256 amount) returns()
-func (_Dispatcher *DispatcherTransactor) ApproveERC20(opts *bind.TransactOpts, stoken common.Address, spender common.Address, amount *big.Int) (*types.Transaction, error) {
-	return _Dispatcher.contract.Transact(opts, "approveERC20", stoken, spender, amount)
+// Solidity: function addReceiver(address to, uint8 receiverType, uint256 point0, uint256 point1) returns()
+func (_Dispatcher *DispatcherTransactor) AddReceiver(opts *bind.TransactOpts, to common.Address, receiverType uint8, point0 *big.Int, point1 *big.Int) (*types.Transaction, error) {
+	return _Dispatcher.contract.Transact(opts, "addReceiver", to, receiverType, point0, point1)
 }
 
-// ApproveERC20 is a paid mutator transaction binding the contract method 0xa8e5e4aa.
+// AddReceiver is a paid mutator transaction binding the contract method 0xc9fa81cb.
 //
-// Solidity: function approveERC20(address stoken, address spender, uint256 amount) returns()
-func (_Dispatcher *DispatcherSession) ApproveERC20(stoken common.Address, spender common.Address, amount *big.Int) (*types.Transaction, error) {
-	return _Dispatcher.Contract.ApproveERC20(&_Dispatcher.TransactOpts, stoken, spender, amount)
+// Solidity: function addReceiver(address to, uint8 receiverType, uint256 point0, uint256 point1) returns()
+func (_Dispatcher *DispatcherSession) AddReceiver(to common.Address, receiverType uint8, point0 *big.Int, point1 *big.Int) (*types.Transaction, error) {
+	return _Dispatcher.Contract.AddReceiver(&_Dispatcher.TransactOpts, to, receiverType, point0, point1)
 }
 
-// ApproveERC20 is a paid mutator transaction binding the contract method 0xa8e5e4aa.
+// AddReceiver is a paid mutator transaction binding the contract method 0xc9fa81cb.
 //
-// Solidity: function approveERC20(address stoken, address spender, uint256 amount) returns()
-func (_Dispatcher *DispatcherTransactorSession) ApproveERC20(stoken common.Address, spender common.Address, amount *big.Int) (*types.Transaction, error) {
-	return _Dispatcher.Contract.ApproveERC20(&_Dispatcher.TransactOpts, stoken, spender, amount)
+// Solidity: function addReceiver(address to, uint8 receiverType, uint256 point0, uint256 point1) returns()
+func (_Dispatcher *DispatcherTransactorSession) AddReceiver(to common.Address, receiverType uint8, point0 *big.Int, point1 *big.Int) (*types.Transaction, error) {
+	return _Dispatcher.Contract.AddReceiver(&_Dispatcher.TransactOpts, to, receiverType, point0, point1)
+}
+
+// ChainBridgeToWithdrawalAccount is a paid mutator transaction binding the contract method 0xd0090cdf.
+//
+// Solidity: function chainBridgeToWithdrawalAccount(uint256 pid, address token, address withdrawalAccount) returns()
+func (_Dispatcher *DispatcherTransactor) ChainBridgeToWithdrawalAccount(opts *bind.TransactOpts, pid *big.Int, token common.Address, withdrawalAccount common.Address) (*types.Transaction, error) {
+	return _Dispatcher.contract.Transact(opts, "chainBridgeToWithdrawalAccount", pid, token, withdrawalAccount)
+}
+
+// ChainBridgeToWithdrawalAccount is a paid mutator transaction binding the contract method 0xd0090cdf.
+//
+// Solidity: function chainBridgeToWithdrawalAccount(uint256 pid, address token, address withdrawalAccount) returns()
+func (_Dispatcher *DispatcherSession) ChainBridgeToWithdrawalAccount(pid *big.Int, token common.Address, withdrawalAccount common.Address) (*types.Transaction, error) {
+	return _Dispatcher.Contract.ChainBridgeToWithdrawalAccount(&_Dispatcher.TransactOpts, pid, token, withdrawalAccount)
+}
+
+// ChainBridgeToWithdrawalAccount is a paid mutator transaction binding the contract method 0xd0090cdf.
+//
+// Solidity: function chainBridgeToWithdrawalAccount(uint256 pid, address token, address withdrawalAccount) returns()
+func (_Dispatcher *DispatcherTransactorSession) ChainBridgeToWithdrawalAccount(pid *big.Int, token common.Address, withdrawalAccount common.Address) (*types.Transaction, error) {
+	return _Dispatcher.Contract.ChainBridgeToWithdrawalAccount(&_Dispatcher.TransactOpts, pid, token, withdrawalAccount)
 }
 
 // Dispatch is a paid mutator transaction binding the contract method 0xe9c4a3ac.
@@ -411,25 +545,46 @@ func (_Dispatcher *DispatcherTransactorSession) Dispatch() (*types.Transaction, 
 	return _Dispatcher.Contract.Dispatch(&_Dispatcher.TransactOpts)
 }
 
-// Execute is a paid mutator transaction binding the contract method 0xfe0d94c1.
+// ReceiverHarvest is a paid mutator transaction binding the contract method 0xa05b1871.
 //
-// Solidity: function execute(uint256 i) returns()
-func (_Dispatcher *DispatcherTransactor) Execute(opts *bind.TransactOpts, i *big.Int) (*types.Transaction, error) {
-	return _Dispatcher.contract.Transact(opts, "execute", i)
+// Solidity: function receiverHarvest(uint256 pid) returns()
+func (_Dispatcher *DispatcherTransactor) ReceiverHarvest(opts *bind.TransactOpts, pid *big.Int) (*types.Transaction, error) {
+	return _Dispatcher.contract.Transact(opts, "receiverHarvest", pid)
 }
 
-// Execute is a paid mutator transaction binding the contract method 0xfe0d94c1.
+// ReceiverHarvest is a paid mutator transaction binding the contract method 0xa05b1871.
 //
-// Solidity: function execute(uint256 i) returns()
-func (_Dispatcher *DispatcherSession) Execute(i *big.Int) (*types.Transaction, error) {
-	return _Dispatcher.Contract.Execute(&_Dispatcher.TransactOpts, i)
+// Solidity: function receiverHarvest(uint256 pid) returns()
+func (_Dispatcher *DispatcherSession) ReceiverHarvest(pid *big.Int) (*types.Transaction, error) {
+	return _Dispatcher.Contract.ReceiverHarvest(&_Dispatcher.TransactOpts, pid)
 }
 
-// Execute is a paid mutator transaction binding the contract method 0xfe0d94c1.
+// ReceiverHarvest is a paid mutator transaction binding the contract method 0xa05b1871.
 //
-// Solidity: function execute(uint256 i) returns()
-func (_Dispatcher *DispatcherTransactorSession) Execute(i *big.Int) (*types.Transaction, error) {
-	return _Dispatcher.Contract.Execute(&_Dispatcher.TransactOpts, i)
+// Solidity: function receiverHarvest(uint256 pid) returns()
+func (_Dispatcher *DispatcherTransactorSession) ReceiverHarvest(pid *big.Int) (*types.Transaction, error) {
+	return _Dispatcher.Contract.ReceiverHarvest(&_Dispatcher.TransactOpts, pid)
+}
+
+// ReceiverWithdraw is a paid mutator transaction binding the contract method 0x499c3f99.
+//
+// Solidity: function receiverWithdraw(uint256 pid, uint256 leaveAmount) returns()
+func (_Dispatcher *DispatcherTransactor) ReceiverWithdraw(opts *bind.TransactOpts, pid *big.Int, leaveAmount *big.Int) (*types.Transaction, error) {
+	return _Dispatcher.contract.Transact(opts, "receiverWithdraw", pid, leaveAmount)
+}
+
+// ReceiverWithdraw is a paid mutator transaction binding the contract method 0x499c3f99.
+//
+// Solidity: function receiverWithdraw(uint256 pid, uint256 leaveAmount) returns()
+func (_Dispatcher *DispatcherSession) ReceiverWithdraw(pid *big.Int, leaveAmount *big.Int) (*types.Transaction, error) {
+	return _Dispatcher.Contract.ReceiverWithdraw(&_Dispatcher.TransactOpts, pid, leaveAmount)
+}
+
+// ReceiverWithdraw is a paid mutator transaction binding the contract method 0x499c3f99.
+//
+// Solidity: function receiverWithdraw(uint256 pid, uint256 leaveAmount) returns()
+func (_Dispatcher *DispatcherTransactorSession) ReceiverWithdraw(pid *big.Int, leaveAmount *big.Int) (*types.Transaction, error) {
+	return _Dispatcher.Contract.ReceiverWithdraw(&_Dispatcher.TransactOpts, pid, leaveAmount)
 }
 
 // RenounceOwnership is a paid mutator transaction binding the contract method 0x715018a6.
@@ -451,6 +606,111 @@ func (_Dispatcher *DispatcherSession) RenounceOwnership() (*types.Transaction, e
 // Solidity: function renounceOwnership() returns()
 func (_Dispatcher *DispatcherTransactorSession) RenounceOwnership() (*types.Transaction, error) {
 	return _Dispatcher.Contract.RenounceOwnership(&_Dispatcher.TransactOpts)
+}
+
+// SetMaximumToWithdrawalAccount is a paid mutator transaction binding the contract method 0x6392f4d3.
+//
+// Solidity: function setMaximumToWithdrawalAccount(uint256 _maximumToWithdrawalAccount) returns()
+func (_Dispatcher *DispatcherTransactor) SetMaximumToWithdrawalAccount(opts *bind.TransactOpts, _maximumToWithdrawalAccount *big.Int) (*types.Transaction, error) {
+	return _Dispatcher.contract.Transact(opts, "setMaximumToWithdrawalAccount", _maximumToWithdrawalAccount)
+}
+
+// SetMaximumToWithdrawalAccount is a paid mutator transaction binding the contract method 0x6392f4d3.
+//
+// Solidity: function setMaximumToWithdrawalAccount(uint256 _maximumToWithdrawalAccount) returns()
+func (_Dispatcher *DispatcherSession) SetMaximumToWithdrawalAccount(_maximumToWithdrawalAccount *big.Int) (*types.Transaction, error) {
+	return _Dispatcher.Contract.SetMaximumToWithdrawalAccount(&_Dispatcher.TransactOpts, _maximumToWithdrawalAccount)
+}
+
+// SetMaximumToWithdrawalAccount is a paid mutator transaction binding the contract method 0x6392f4d3.
+//
+// Solidity: function setMaximumToWithdrawalAccount(uint256 _maximumToWithdrawalAccount) returns()
+func (_Dispatcher *DispatcherTransactorSession) SetMaximumToWithdrawalAccount(_maximumToWithdrawalAccount *big.Int) (*types.Transaction, error) {
+	return _Dispatcher.Contract.SetMaximumToWithdrawalAccount(&_Dispatcher.TransactOpts, _maximumToWithdrawalAccount)
+}
+
+// SetOperator is a paid mutator transaction binding the contract method 0x558a7297.
+//
+// Solidity: function setOperator(address user, bool allow) returns()
+func (_Dispatcher *DispatcherTransactor) SetOperator(opts *bind.TransactOpts, user common.Address, allow bool) (*types.Transaction, error) {
+	return _Dispatcher.contract.Transact(opts, "setOperator", user, allow)
+}
+
+// SetOperator is a paid mutator transaction binding the contract method 0x558a7297.
+//
+// Solidity: function setOperator(address user, bool allow) returns()
+func (_Dispatcher *DispatcherSession) SetOperator(user common.Address, allow bool) (*types.Transaction, error) {
+	return _Dispatcher.Contract.SetOperator(&_Dispatcher.TransactOpts, user, allow)
+}
+
+// SetOperator is a paid mutator transaction binding the contract method 0x558a7297.
+//
+// Solidity: function setOperator(address user, bool allow) returns()
+func (_Dispatcher *DispatcherTransactorSession) SetOperator(user common.Address, allow bool) (*types.Transaction, error) {
+	return _Dispatcher.Contract.SetOperator(&_Dispatcher.TransactOpts, user, allow)
+}
+
+// SetPercentageToWithdrawalAccount is a paid mutator transaction binding the contract method 0xeab741e7.
+//
+// Solidity: function setPercentageToWithdrawalAccount(uint256 _percentageToWithdrawalAccount) returns()
+func (_Dispatcher *DispatcherTransactor) SetPercentageToWithdrawalAccount(opts *bind.TransactOpts, _percentageToWithdrawalAccount *big.Int) (*types.Transaction, error) {
+	return _Dispatcher.contract.Transact(opts, "setPercentageToWithdrawalAccount", _percentageToWithdrawalAccount)
+}
+
+// SetPercentageToWithdrawalAccount is a paid mutator transaction binding the contract method 0xeab741e7.
+//
+// Solidity: function setPercentageToWithdrawalAccount(uint256 _percentageToWithdrawalAccount) returns()
+func (_Dispatcher *DispatcherSession) SetPercentageToWithdrawalAccount(_percentageToWithdrawalAccount *big.Int) (*types.Transaction, error) {
+	return _Dispatcher.Contract.SetPercentageToWithdrawalAccount(&_Dispatcher.TransactOpts, _percentageToWithdrawalAccount)
+}
+
+// SetPercentageToWithdrawalAccount is a paid mutator transaction binding the contract method 0xeab741e7.
+//
+// Solidity: function setPercentageToWithdrawalAccount(uint256 _percentageToWithdrawalAccount) returns()
+func (_Dispatcher *DispatcherTransactorSession) SetPercentageToWithdrawalAccount(_percentageToWithdrawalAccount *big.Int) (*types.Transaction, error) {
+	return _Dispatcher.Contract.SetPercentageToWithdrawalAccount(&_Dispatcher.TransactOpts, _percentageToWithdrawalAccount)
+}
+
+// SetPuppetDispatcher is a paid mutator transaction binding the contract method 0x3199d626.
+//
+// Solidity: function setPuppetDispatcher(address contractAddress, address from) returns()
+func (_Dispatcher *DispatcherTransactor) SetPuppetDispatcher(opts *bind.TransactOpts, contractAddress common.Address, from common.Address) (*types.Transaction, error) {
+	return _Dispatcher.contract.Transact(opts, "setPuppetDispatcher", contractAddress, from)
+}
+
+// SetPuppetDispatcher is a paid mutator transaction binding the contract method 0x3199d626.
+//
+// Solidity: function setPuppetDispatcher(address contractAddress, address from) returns()
+func (_Dispatcher *DispatcherSession) SetPuppetDispatcher(contractAddress common.Address, from common.Address) (*types.Transaction, error) {
+	return _Dispatcher.Contract.SetPuppetDispatcher(&_Dispatcher.TransactOpts, contractAddress, from)
+}
+
+// SetPuppetDispatcher is a paid mutator transaction binding the contract method 0x3199d626.
+//
+// Solidity: function setPuppetDispatcher(address contractAddress, address from) returns()
+func (_Dispatcher *DispatcherTransactorSession) SetPuppetDispatcher(contractAddress common.Address, from common.Address) (*types.Transaction, error) {
+	return _Dispatcher.Contract.SetPuppetDispatcher(&_Dispatcher.TransactOpts, contractAddress, from)
+}
+
+// SetPuppetOperator is a paid mutator transaction binding the contract method 0x1e925b0c.
+//
+// Solidity: function setPuppetOperator(address contractAddress, address user, bool allow) returns()
+func (_Dispatcher *DispatcherTransactor) SetPuppetOperator(opts *bind.TransactOpts, contractAddress common.Address, user common.Address, allow bool) (*types.Transaction, error) {
+	return _Dispatcher.contract.Transact(opts, "setPuppetOperator", contractAddress, user, allow)
+}
+
+// SetPuppetOperator is a paid mutator transaction binding the contract method 0x1e925b0c.
+//
+// Solidity: function setPuppetOperator(address contractAddress, address user, bool allow) returns()
+func (_Dispatcher *DispatcherSession) SetPuppetOperator(contractAddress common.Address, user common.Address, allow bool) (*types.Transaction, error) {
+	return _Dispatcher.Contract.SetPuppetOperator(&_Dispatcher.TransactOpts, contractAddress, user, allow)
+}
+
+// SetPuppetOperator is a paid mutator transaction binding the contract method 0x1e925b0c.
+//
+// Solidity: function setPuppetOperator(address contractAddress, address user, bool allow) returns()
+func (_Dispatcher *DispatcherTransactorSession) SetPuppetOperator(contractAddress common.Address, user common.Address, allow bool) (*types.Transaction, error) {
+	return _Dispatcher.Contract.SetPuppetOperator(&_Dispatcher.TransactOpts, contractAddress, user, allow)
 }
 
 // Sweep is a paid mutator transaction binding the contract method 0xb8dc491b.
@@ -495,25 +755,67 @@ func (_Dispatcher *DispatcherTransactorSession) TransferOwnership(newOwner commo
 	return _Dispatcher.Contract.TransferOwnership(&_Dispatcher.TransactOpts, newOwner)
 }
 
-// UpdateStrategys is a paid mutator transaction binding the contract method 0x91eb23b3.
+// TreasuryWithdraw is a paid mutator transaction binding the contract method 0x6d30a95d.
 //
-// Solidity: function updateStrategys(uint256 index, uint256 point) returns()
-func (_Dispatcher *DispatcherTransactor) UpdateStrategys(opts *bind.TransactOpts, index *big.Int, point *big.Int) (*types.Transaction, error) {
-	return _Dispatcher.contract.Transact(opts, "updateStrategys", index, point)
+// Solidity: function treasuryWithdraw(address from) returns()
+func (_Dispatcher *DispatcherTransactor) TreasuryWithdraw(opts *bind.TransactOpts, from common.Address) (*types.Transaction, error) {
+	return _Dispatcher.contract.Transact(opts, "treasuryWithdraw", from)
 }
 
-// UpdateStrategys is a paid mutator transaction binding the contract method 0x91eb23b3.
+// TreasuryWithdraw is a paid mutator transaction binding the contract method 0x6d30a95d.
 //
-// Solidity: function updateStrategys(uint256 index, uint256 point) returns()
-func (_Dispatcher *DispatcherSession) UpdateStrategys(index *big.Int, point *big.Int) (*types.Transaction, error) {
-	return _Dispatcher.Contract.UpdateStrategys(&_Dispatcher.TransactOpts, index, point)
+// Solidity: function treasuryWithdraw(address from) returns()
+func (_Dispatcher *DispatcherSession) TreasuryWithdraw(from common.Address) (*types.Transaction, error) {
+	return _Dispatcher.Contract.TreasuryWithdraw(&_Dispatcher.TransactOpts, from)
 }
 
-// UpdateStrategys is a paid mutator transaction binding the contract method 0x91eb23b3.
+// TreasuryWithdraw is a paid mutator transaction binding the contract method 0x6d30a95d.
 //
-// Solidity: function updateStrategys(uint256 index, uint256 point) returns()
-func (_Dispatcher *DispatcherTransactorSession) UpdateStrategys(index *big.Int, point *big.Int) (*types.Transaction, error) {
-	return _Dispatcher.Contract.UpdateStrategys(&_Dispatcher.TransactOpts, index, point)
+// Solidity: function treasuryWithdraw(address from) returns()
+func (_Dispatcher *DispatcherTransactorSession) TreasuryWithdraw(from common.Address) (*types.Transaction, error) {
+	return _Dispatcher.Contract.TreasuryWithdraw(&_Dispatcher.TransactOpts, from)
+}
+
+// TreasuryWithdrawAndDispatch is a paid mutator transaction binding the contract method 0x5d00a825.
+//
+// Solidity: function treasuryWithdrawAndDispatch(address from) returns()
+func (_Dispatcher *DispatcherTransactor) TreasuryWithdrawAndDispatch(opts *bind.TransactOpts, from common.Address) (*types.Transaction, error) {
+	return _Dispatcher.contract.Transact(opts, "treasuryWithdrawAndDispatch", from)
+}
+
+// TreasuryWithdrawAndDispatch is a paid mutator transaction binding the contract method 0x5d00a825.
+//
+// Solidity: function treasuryWithdrawAndDispatch(address from) returns()
+func (_Dispatcher *DispatcherSession) TreasuryWithdrawAndDispatch(from common.Address) (*types.Transaction, error) {
+	return _Dispatcher.Contract.TreasuryWithdrawAndDispatch(&_Dispatcher.TransactOpts, from)
+}
+
+// TreasuryWithdrawAndDispatch is a paid mutator transaction binding the contract method 0x5d00a825.
+//
+// Solidity: function treasuryWithdrawAndDispatch(address from) returns()
+func (_Dispatcher *DispatcherTransactorSession) TreasuryWithdrawAndDispatch(from common.Address) (*types.Transaction, error) {
+	return _Dispatcher.Contract.TreasuryWithdrawAndDispatch(&_Dispatcher.TransactOpts, from)
+}
+
+// UpdateReceiver is a paid mutator transaction binding the contract method 0xc1524a65.
+//
+// Solidity: function updateReceiver(uint256 index, uint256 point0, uint256 point1) returns()
+func (_Dispatcher *DispatcherTransactor) UpdateReceiver(opts *bind.TransactOpts, index *big.Int, point0 *big.Int, point1 *big.Int) (*types.Transaction, error) {
+	return _Dispatcher.contract.Transact(opts, "updateReceiver", index, point0, point1)
+}
+
+// UpdateReceiver is a paid mutator transaction binding the contract method 0xc1524a65.
+//
+// Solidity: function updateReceiver(uint256 index, uint256 point0, uint256 point1) returns()
+func (_Dispatcher *DispatcherSession) UpdateReceiver(index *big.Int, point0 *big.Int, point1 *big.Int) (*types.Transaction, error) {
+	return _Dispatcher.Contract.UpdateReceiver(&_Dispatcher.TransactOpts, index, point0, point1)
+}
+
+// UpdateReceiver is a paid mutator transaction binding the contract method 0xc1524a65.
+//
+// Solidity: function updateReceiver(uint256 index, uint256 point0, uint256 point1) returns()
+func (_Dispatcher *DispatcherTransactorSession) UpdateReceiver(index *big.Int, point0 *big.Int, point1 *big.Int) (*types.Transaction, error) {
+	return _Dispatcher.Contract.UpdateReceiver(&_Dispatcher.TransactOpts, index, point0, point1)
 }
 
 // DispatcherDispatchIterator is returned from FilterDispatch and is used to iterate over the raw logs and unpacked data for Dispatch events raised by the Dispatcher contract.

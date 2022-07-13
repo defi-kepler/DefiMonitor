@@ -4,7 +4,6 @@ import (
 	"goskeleton/app/global/variable"
 	"goskeleton/app/service/monitor"
 	"goskeleton/app/utils/blockchain"
-	"math/big"
 	"time"
 
 	"github.com/robfig/cron"
@@ -25,11 +24,10 @@ const (
 )
 
 var (
-	LogAction       string
-	Date            string
-	BUSDTreasuryAdd string            = variable.ConfigDefiYml.GetString("BUSDTreasury")
-	lastHash        map[uint8]*TxHash = make(map[uint8]*TxHash)
-	logger                            = variable.ZapLog.Sugar()
+	LogAction string
+	Date      string
+	lastHash  map[uint8]*TxHash = make(map[uint8]*TxHash)
+	logger                      = variable.ZapLog.Sugar()
 )
 
 var Monitor = &cobra.Command{
@@ -53,63 +51,42 @@ func init() {
 
 func start(actionName, Date string) {
 	crontab := cron.New()
-
-	spec := "*/10 * * * * ?"
-	crontab.AddFunc(spec, func() { WithdrawFn(BUSDTreasuryAdd) })
-	crontab.AddFunc(spec, DispatchFn)
-	crontab.AddFunc(spec, ExecuteFn)
+	dispatcherService := monitor.CreateDispatcherService()
+	//每分钟检测一次出金合约是否有余额，如果达到阀值就调用合约
+	crontab.AddFunc("0 0/1 * * * ?", func() { TreasuryWithdrawAndDispatchFn(dispatcherService) })
+	//每6小时从出金合约转入调度合约并进行分发
+	crontab.AddFunc("0 0 0/6 * * ?", func() { DispatchFn(dispatcherService) })
 	crontab.Start()
 	select {}
 }
 
 //From recharge contract withdrawal to dispatching contract
-func WithdrawFn(treasuryAdd string) {
-	logger.Info("WithdrawFn")
+func TreasuryWithdrawAndDispatchFn(dispatcherService *monitor.DispatcherService) {
+	logger.Info("TreasuryWithdrawAndDispatchFn")
 
 	var lastTx *TxHash = lastHash[ACTION_WITHDRAW]
 	if CanCall(lastTx, TIME_DAY) {
-		treasuryService := monitor.CreateTreasuryService(treasuryAdd)
-		tx, _ := treasuryService.Withdraw()
-		if tx != nil {
-			variable.ZapLog.Info("---", zap.String("tx", tx.Hash().Hex()))
-			lastHash[ACTION_WITHDRAW] = &TxHash{tx.Hash().Hex(), time.Now()}
+		if dispatcherService.CanChainBridgeToWithdrawalAccount() {
+			tx, _ := dispatcherService.ChainBridgeToWithdrawalAccount()
+			if tx != nil {
+				variable.ZapLog.Info("---", zap.String("tx", tx.Hash().Hex()))
+				lastHash[ACTION_WITHDRAW] = &TxHash{tx.Hash().Hex(), time.Now()}
+			}
 		}
+
 	}
 }
 
-func DispatchFn() {
+func DispatchFn(dispatcherService *monitor.DispatcherService) {
 	logger.Info("Dispatch ....")
 	var lastTx *TxHash = lastHash[ACTION_DISPATCH]
 	if CanCall(lastTx, TIME_DAY) {
-		dispatcherService := monitor.CreateDispatcherService()
-		tx, _ := dispatcherService.Dispatch()
+		tx, _ := dispatcherService.TreasuryWithdrawAndDispatch()
 		if tx != nil {
 			variable.ZapLog.Info("---", zap.String("tx", tx.Hash().Hex()))
 			lastHash[ACTION_DISPATCH] = &TxHash{tx.Hash().Hex(), time.Now()}
 		}
 	}
-}
-
-func ExecuteFn() {
-
-	const LENGTH uint8 = 2
-	var i uint8 = 0
-	dispatcherService := monitor.CreateDispatcherService()
-	for ; i < LENGTH; i++ {
-		var lastTx *TxHash = lastHash[ACTION_EXECUTE+i]
-		if CanCall(lastTx, TIME_DAY) {
-			logger.Info("Execute ", zap.Uint("i", uint(i)))
-			if !dispatcherService.CanExecute(big.NewInt(int64(i))) {
-				continue
-			}
-			tx, _ := dispatcherService.Execute(big.NewInt(int64(i)))
-			if tx != nil {
-				variable.ZapLog.Info("---", zap.String("tx", tx.Hash().Hex()))
-				lastHash[ACTION_EXECUTE+i] = &TxHash{tx.Hash().Hex(), time.Now()}
-			}
-		}
-	}
-
 }
 
 func CanCall(tx *TxHash, interval int64) bool {
