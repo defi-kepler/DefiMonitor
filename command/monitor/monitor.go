@@ -55,7 +55,7 @@ func start(actionName, Date string) {
 	//每分钟检测一次出金合约是否有余额，如果达到阀值就调用合约
 	crontab.AddFunc("0 0/1 * * * ?", func() { TreasuryWithdrawAndDispatchFn(dispatcherService) })
 	//每6小时从出金合约转入调度合约并进行分发
-	crontab.AddFunc("0 0 0/6 * * ?", func() { DispatchFn(dispatcherService) })
+	//crontab.AddFunc("0 0/1 * * * ?", func() { DispatchFn(dispatcherService) })
 	crontab.Start()
 	select {}
 }

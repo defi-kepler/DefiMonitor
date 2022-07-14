@@ -2,6 +2,7 @@ package monitor
 
 import (
 	"crypto/ecdsa"
+	"fmt"
 	"goskeleton/abi/defi/dispatcher"
 	"goskeleton/abi/defi/erc20"
 	"goskeleton/app/global/variable"
@@ -42,8 +43,10 @@ func CreateDispatcherService() *DispatcherService {
 	}
 	treasuryAddress := common.HexToAddress(variable.ConfigDefiYml.GetString("TreasuryAddress"))
 	chainBridgeId := big.NewInt(variable.ConfigDefiYml.GetInt64("ChainBridgeId"))
-	var withdrawalAccountThreshold = big.NewInt(variable.ConfigDefiYml.GetInt64("WithdrawalAccountThreshold"))
-	withdrawalAccountThreshold = blockchain.ToWei(withdrawalAccountThreshold, 18)
+	var withdrawalAccountThresholdInt = variable.ConfigDefiYml.GetInt64("WithdrawalAccountThreshold")
+	withdrawalAccountThreshold := blockchain.ToWei(withdrawalAccountThresholdInt, 18)
+	withdrawalAccountThresholdInt1 := withdrawalAccountThreshold.String()
+	fmt.Printf("%v \n", withdrawalAccountThresholdInt1)
 	withdrawalTokenAddress := common.HexToAddress(variable.ConfigDefiYml.GetString("WithdrawalTokenAddress"))
 	withdrawalTokenErc20, err := erc20.NewErc20(withdrawalTokenAddress, blockchain.Client)
 	if err != nil {
