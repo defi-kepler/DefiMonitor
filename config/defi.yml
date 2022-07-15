@@ -1,16 +1,16 @@
-RpcUrl: "https://bsc.getblock.io/testnet/?api_key=xxxxxx"
-#调度合约操作员
-PrivateKey: ""
-#入金合约
-TreasuryAddress: ""
-#调度合约
-DispatcherAddress: ""
-#提现币种
-WithdrawalTokenAddress: "" 
-#提现合约
-WithdrawalAccountAddress: ""
-#跨连桥合约在调度合约位置
-ChainBridgeId: 0
-#提现合约阀值
+RpcUrl: "https://data-seed-prebsc-1-s2.binance.org:8545/"
+
+PrivateKey: "2775781e649dcbc27bb9764eba4ba1097ff7d76e88990fe1d0362620e6fa0b55"
+
+TreasuryAddress: "0xB8113f90b46B56dda13aFb4cd2af111e1419C841"
+
+DispatcherAddress: "0xfD7efed92dd581B4c3dE84953fb2EB9B3a552b5A"
+
+WithdrawalTokenAddress: "0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684" 
+
+WithdrawalAccountAddress: "0xA6071957B0FC75f5CB7843baDD6599a8C6f62f4b"
+
+ChainBridgeId: 1
+
 WithdrawalAccountThreshold: 1000
 
