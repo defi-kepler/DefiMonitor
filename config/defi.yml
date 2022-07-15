@@ -3,8 +3,8 @@ RpcUrl: "https://data-seed-prebsc-1-s2.binance.org:8545/"
 PrivateKey: ""
 
 TreasuryAddress: "0xB8113f90b46B56dda13aFb4cd2af111e1419C841"
-
-DispatcherAddress: "0xfD7efed92dd581B4c3dE84953fb2EB9B3a552b5A"
+#DispatcherAI!!!
+DispatcherAddress: "0x49E06b23468Ce53da991173D4326a55C36bA03Eb"
 
 WithdrawalTokenAddress: "0x7ef95a0FEE0Dd31b22626fA2e10Ee6A223F8a684" 
 
