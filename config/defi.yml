@@ -1,6 +1,6 @@
 RpcUrl: "https://data-seed-prebsc-1-s2.binance.org:8545/"
 
-PrivateKey: "2775781e649dcbc27bb9764eba4ba1097ff7d76e88990fe1d0362620e6fa0b55"
+PrivateKey: ""
 
 TreasuryAddress: "0xB8113f90b46B56dda13aFb4cd2af111e1419C841"
 
