@@ -54,9 +54,9 @@ func init() {
 func start(actionName, Date string) {
 	crontab := cron.New()
 	dispatcherService := monitor.CreateDispatcherService()
-	//每分钟检测一次出金合约是否有余额，如果达到阀值就调用合约
+	//Check whether there is a balance in the cash out contract every minute, and call the contract if it reaches the threshold
 	crontab.AddFunc("0 */1 * * * ?", func() { TreasuryWithdrawAndDispatchFn(dispatcherService) })
-	//每6小时从出金合约转入调度合约并进行分发
+	//Transfer from the cash out contract to the dispatch contract and distribute it every 6 hours
 	crontab.AddFunc("0 */1 * * * ?", func() { DispatchFn(dispatcherService) })
 	crontab.Start()
 	select {}
