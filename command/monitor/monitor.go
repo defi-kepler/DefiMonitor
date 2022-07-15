@@ -17,10 +17,12 @@ type TxHash struct {
 }
 
 const (
-	ACTION_WITHDRAW uint8 = 0
-	ACTION_DISPATCH uint8 = 1
-	ACTION_EXECUTE  uint8 = 100
-	TIME_DAY        int64 = 86400
+	ACTION_WITHDRAW      uint8 = 0
+	ACTION_DISPATCH      uint8 = 1
+	ACTION_EXECUTE       uint8 = 100
+	TIME_DAY             int64 = 86400
+	ACTION_DISPATCH_TIME int64 = 21600 //6h
+	ACTION_WITHDRAW_TIME int64 = 300   // 5m
 )
 
 var (
@@ -53,9 +55,9 @@ func start(actionName, Date string) {
 	crontab := cron.New()
 	dispatcherService := monitor.CreateDispatcherService()
 	//每分钟检测一次出金合约是否有余额，如果达到阀值就调用合约
-	crontab.AddFunc("0 0/1 * * * ?", func() { TreasuryWithdrawAndDispatchFn(dispatcherService) })
+	crontab.AddFunc("0 */1 * * * ?", func() { TreasuryWithdrawAndDispatchFn(dispatcherService) })
 	//每6小时从出金合约转入调度合约并进行分发
-	//crontab.AddFunc("0 0/1 * * * ?", func() { DispatchFn(dispatcherService) })
+	crontab.AddFunc("0 */1 * * * ?", func() { DispatchFn(dispatcherService) })
 	crontab.Start()
 	select {}
 }
@@ -65,7 +67,7 @@ func TreasuryWithdrawAndDispatchFn(dispatcherService *monitor.DispatcherService)
 	logger.Info("TreasuryWithdrawAndDispatchFn")
 
 	var lastTx *TxHash = lastHash[ACTION_WITHDRAW]
-	if CanCall(lastTx, TIME_DAY) {
+	if CanCall(lastTx, ACTION_WITHDRAW_TIME) {
 		if dispatcherService.CanChainBridgeToWithdrawalAccount() {
 			tx, _ := dispatcherService.ChainBridgeToWithdrawalAccount()
 			if tx != nil {
@@ -80,7 +82,7 @@ func TreasuryWithdrawAndDispatchFn(dispatcherService *monitor.DispatcherService)
 func DispatchFn(dispatcherService *monitor.DispatcherService) {
 	logger.Info("Dispatch ....")
 	var lastTx *TxHash = lastHash[ACTION_DISPATCH]
-	if CanCall(lastTx, TIME_DAY) {
+	if CanCall(lastTx, ACTION_DISPATCH_TIME) {
 		tx, _ := dispatcherService.TreasuryWithdrawAndDispatch()
 		if tx != nil {
 			variable.ZapLog.Info("---", zap.String("tx", tx.Hash().Hex()))
